@@ -1,25 +1,27 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import ShortenerPage from "./pages/ShortenerPage";
+import StatsPage from "./pages/StatsPage";
+import RedirectPage from "./pages/RedirectPage";
+import { Container, AppBar, Toolbar, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <AppBar position="static">
+        <Toolbar>
+          <Button color="inherit" component={Link} to="/">Shortener</Button>
+          <Button color="inherit" component={Link} to="/stats">Statistics</Button>
+        </Toolbar>
+      </AppBar>
+      <Container sx={{ mt: 4 }}>
+        <Routes>
+          <Route path="/" element={<ShortenerPage />} />
+          <Route path="/stats" element={<StatsPage />} />
+          <Route path="/:shortcode" element={<RedirectPage />} />
+        </Routes>
+      </Container>
+    </BrowserRouter>
   );
 }
-
-export default App;
